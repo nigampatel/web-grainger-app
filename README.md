@@ -1,14 +1,3 @@
-## Getting Started
-
-Run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-
 # Grainger Interview App
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
@@ -18,6 +7,7 @@ The goal of the app is to demonstrate a simple product workflow where a user can
 * View a list of products
 * Add a new product
 * Navigate between the product list and create-product pages
+* Used Client side routing
 
 The project is intentionally kept simple so the focus stays on structure, component design, API interaction, and maintainability.
 
@@ -124,7 +114,7 @@ types/
 
 The products are currently stored in memory inside the API route.
 
-This was done intentionally to keep the project lightweight and avoid adding database setup for a small interview exercise.
+This was done intentionally to keep the project lightweight and avoid adding database setup.
 
 Because the data is stored in memory, newly added products may be reset when the development server restarts.
 
