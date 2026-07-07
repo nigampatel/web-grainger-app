@@ -3,19 +3,27 @@ import type { Product } from "@/types/product";
 const products: Product[] = [
     {
         id: 1,
-        title: "Product 1"
+        title: "Product 1",
+        price: 19.99,
+        cost: 10.00
     },
     {
         id: 2,
-        title: "Product 2"
+        title: "Product 2",
+        price: 29.99,
+        cost: 15.00
     },
     {
         id: 3, 
-        title: "Product 3"
+        title: "Product 3",
+        price: 39.99,
+        cost: 20.00
     },
     {
         id: 4,
-        title: "Product 4"
+        title: "Product 4",
+        price: 49.99,
+        cost: 25.00
     }
 ];
 
@@ -29,6 +37,10 @@ export async function GET() {
 export async function POST(request: Request) {
   const body = await request.json();
   const title = body.title?.trim();
+  const price = body.price ?? 0;
+  const cost = body.cost ?? 0;
+
+  console.log("Received POST request with title:", title, "price:", price, "cost:", cost);
 
   if (!title) {
     return Response.json(
@@ -40,6 +52,8 @@ export async function POST(request: Request) {
   const newProduct: Product = {
     id: Date.now(),
     title,
+    price,
+    cost
   };
 
   products.push(newProduct);

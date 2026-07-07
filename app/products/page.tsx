@@ -3,36 +3,39 @@
 import { useEffect, useState } from "react";
 import { ProductCard } from "@/components/products/product-card";
 import type { Product } from "@/types/product";
+import { getProducts } from "@/lib/products-api";
 
-export default function ProductsPage() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
+export default async function  ProductsPage() {
 
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const response = await fetch("/api/products");
+  const products = await getProducts();
+  //const [products, setProducts] = useState<Product[]>([]);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [error, setError] = useState("");
 
-        if (!response.ok) {
-          throw new Error("Failed to load products.");
-        }
+  // useEffect(() => {
+  //   async function fetchProducts() {
+  //     try {
+  //       const response = await fetch("/api/products");
 
-        const data: Product[] = await response.json();
-        setProducts(data);
-      } catch (error) {
-        setError(
-          error instanceof Error
-            ? error.message
-            : "Something went wrong."
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    }
+  //       if (!response.ok) {
+  //         throw new Error("Failed to load products.");
+  //       }
 
-    fetchProducts();
-  }, []);
+  //       const data: Product[] = await response.json();
+  //       setProducts(data);
+  //     } catch (error) {
+  //       setError(
+  //         error instanceof Error
+  //           ? error.message
+  //           : "Something went wrong."
+  //       );
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+
+  //   fetchProducts();
+  // }, []);
 
 
   return (
@@ -48,25 +51,14 @@ export default function ProductsPage() {
           </p>
         </header>
 
-        {isLoading && (
-          <p className="text-muted-foreground">
-            Loading products...
-          </p>
-        )}
 
-        {error && (
-          <p role="alert" className="text-destructive">
-            {error}
-          </p>
-        )}
-
-        {!isLoading && !error && products.length === 0 && (
+        {products.length === 0 && (
           <p className="text-muted-foreground">
             No products found.
           </p>
         )}
 
-        {!isLoading && !error && products.length > 0 && (
+       
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
               <ProductCard
@@ -75,7 +67,6 @@ export default function ProductsPage() {
               />
             ))}
           </div>
-        )}
       </div>
     </main>
   );

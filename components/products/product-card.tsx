@@ -19,6 +19,8 @@ export function ProductCard({ product }: ProductCardProps) {
 
       <CardContent>
         <p>Product ID: {product.id}</p>
+        <p>Price: ${product.price.toFixed(2)}</p>
+        <p>Gross Profit: {product.grossProfitPercentage.toFixed(2)}%</p>
       </CardContent>
     </Card>
   );

@@ -14,6 +14,8 @@ export function CreateProduct({
   onProductCreated,
 }: CreateProductFormProps) {
   const [title, setTitle] = useState("");
+  const [price, setPrice] = useState(0);
+  const [cost, setCost] = useState(0);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -38,6 +40,8 @@ export function CreateProduct({
         },
         body: JSON.stringify({
           title: trimmedTitle,
+          price,
+          cost,
         }),
       });
 
@@ -83,7 +87,24 @@ export function CreateProduct({
             placeholder="Enter product title"
             disabled={isSubmitting}
           />
+          <Input
+          id="product-price"
+          type="number"
+          value={price}
+          onChange={(event) => setPrice(parseFloat(event.target.value))}
+          placeholder="Enter product price"
+          disabled={isSubmitting}
+        />
+        <Input
+          id="product-cost"
+          type="number"
+          value={cost}
+          onChange={(event) => setCost(parseFloat(event.target.value))}
+          placeholder="Enter product cost"
+          disabled={isSubmitting}
+        />
         </div>
+
 
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Adding..." : "Add Product"}
